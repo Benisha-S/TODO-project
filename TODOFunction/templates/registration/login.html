@@ -1,0 +1,107 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background: url('{% static "images/daily.jpg" %}') no-repeat center center fixed;
+            background-size: cover;
+            background-color: #f8f9fa; /* Light background color */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Full viewport height */
+            margin: 0;
+            padding-top: 70px; /* Ensure content is not hidden behind the topbar */
+        }
+        .topbar {
+            background-color: rgba(44, 62, 80, 0.9); /* Darker background color with opacity */
+            color: #ecf0f1; /* Light text color */
+            padding: 15px 30px; /* Add padding for spacing */
+            display: flex;
+            justify-content: space-between;
+            align-items: center; /* Center items vertically */
+            width: 100%; /* Full width */
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5); /* Add shadow for depth */
+            position: fixed; /* Fix the topbar at the top of the viewport */
+            top: 0;
+            z-index: 1000; /* Ensure topbar stays above other content */
+        }
+        .topbar .logo {
+            font-size: 28px; /* Larger font size for the logo */
+            font-weight: bold; /* Bold font weight */
+            text-transform: uppercase; /* Uppercase text */
+            letter-spacing: 2px; /* Add letter spacing for clarity */
+            color: #ffcc00; /* Logo color */
+        }
+        .topbar .menu {
+            list-style-type: none; /* Remove default list styling */
+            margin: 0; /* Remove default margin */
+            padding: 0; /* Remove default padding */
+            display: flex;
+        }
+        .topbar .menu li {
+            margin-left: 25px; /* Add more spacing between menu items */
+            position: relative; /* Ensure submenu is positioned correctly */
+        }
+        .topbar .menu li a {
+            color: #ecf0f1; /* Light text color */
+            text-decoration: none; /* Remove default underline */
+            transition: color 0.3s; /* Add transition for smoother color change */
+            font-size: 18px; /* Adjust font size */
+            font-weight: bold; /* Bold font weight */
+            text-transform: uppercase; /* Uppercase text */
+        }
+        .topbar .menu li a:hover {
+            color: #ffcc00; /* Change text color on hover */
+        }
+        .topbar .menu li:last-child {
+            margin-right: 30px; /* Add spacing to the last menu item */
+        }
+        .login-container {
+            background-color: #000000; /* Black background color */
+            padding: 30px;
+            border-radius: 8px; /* Rounded corners */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            max-width: 400px;
+            width: 100%;
+        }
+        .login-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #ffffff; /* White text color */
+        }
+        .login-container button {
+            width: 100%; /* Full width button */
+            padding: 10px;
+            background-color: #007bff; /* Primary button color */
+            border: none;
+            color: #ffffff; /* White text color */
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        .login-container button:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+    </style>
+</head>
+<body>
+    {% include 'topbar.html' %}
+    <div class="login-container">
+        <h2>Login</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Login</button>
+        </form>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

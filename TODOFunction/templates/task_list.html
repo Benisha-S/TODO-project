@@ -1,0 +1,107 @@
+{% include 'topbar.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Task List</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #f5f7fa, #c3cfe2); /* Gradient background */
+            padding-top: 20px;
+            font-family: Arial, sans-serif;
+        }
+        .task-list-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #ffffff; /* White background for the container */
+            padding: 30px;
+            border-radius: 8px; /* Rounded corners */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        }
+        .task-list-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #343a40; /* Dark text color */
+        }
+        .create-task-link {
+            display: block;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #007bff; /* Primary link color */
+            text-decoration: none;
+        }
+        .create-task-link:hover {
+            color: #0056b3; /* Darker blue on hover */
+        }
+        .task-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .task-list li {
+            background-color: #ffffff; /* White background */
+            margin-bottom: 10px;
+            padding: 15px;
+            border-radius: 8px; /* Rounded corners */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            transition: box-shadow 0.3s ease;
+        }
+        .task-list li:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Hover shadow */
+        }
+        .task-list li strong {
+            display: block;
+            color: #343a40; /* Dark text color */
+            font-size: 18px; /* Increased font size for task title */
+            margin-bottom: 5px; /* Space between title and description */
+        }
+        .task-list li .description {
+            color: #6c757d; /* Gray text color for description */
+            font-size: 16px; /* Slightly smaller font size for description */
+        }
+        .task-list li .completed {
+            color: #28a745; /* Green text for completed tasks */
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        .task-actions {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+        }
+        .task-actions .btn {
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="task-list-container">
+        <h2>Task List</h2>
+        <a href="{% url 'task_create' %}" class="create-task-link">Create Task</a>
+        <ul class="task-list">
+            {% for task in tasks %}
+                <li>
+                    <strong>{{ task.title }}</strong>
+                    <span class="description">{{ task.description }}</span>
+                    <div class="task-actions">
+                        {% if not task.completed %}
+                            <a href="{% url 'task_complete' task.id %}" class="btn btn-success btn-sm"><i class="fas fa-check"></i> Mark as Completed</a>
+                        {% else %}
+                            <span class="completed">Completed</span>
+                        {% endif %}
+                        <a href="{% url 'task_update' task.id %}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Edit</a>
+                        <a href="{% url 'task_delete' task.id %}" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Delete</a>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</body>
+</html>
